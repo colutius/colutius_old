@@ -1,5 +1,7 @@
 # Colutius - 
 
+[English](README.md) [中文](README-CN.md)
+
 Welcome to the
 
 ```
