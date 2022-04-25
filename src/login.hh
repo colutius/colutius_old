@@ -1,8 +1,9 @@
 #pragma once
 
+#include <QFile>
 #include <QWidget>
-
-namespace Ui {
+namespace Ui
+{
 class Login;
 }
 
@@ -10,11 +11,12 @@ class Login : public QWidget
 {
     Q_OBJECT
 
-public:
+  public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-private:
+    void setStyle();
+
+  private:
     Ui::Login *ui;
 };
-
