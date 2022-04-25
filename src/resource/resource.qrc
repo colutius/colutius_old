@@ -1,5 +1,16 @@
 <RCC>
     <qresource prefix="/qss">
         <file>Login.qss</file>
+        <file>Widget.qss</file>
+    </qresource>
+    <qresource prefix="/iconfont">
+        <file>iconfont/demo_index.html</file>
+        <file>iconfont/demo.css</file>
+        <file>iconfont/iconfont.css</file>
+        <file>iconfont/iconfont.js</file>
+        <file>iconfont/iconfont.json</file>
+        <file>iconfont/iconfont.ttf</file>
+        <file>iconfont/iconfont.woff</file>
+        <file>iconfont/iconfont.woff2</file>
     </qresource>
 </RCC>

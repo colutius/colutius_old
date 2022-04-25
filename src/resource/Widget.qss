@@ -1,0 +1,41 @@
+#sendBtn {
+font-size: 45px;
+color:#6699cc;
+border-radius:100px;
+}
+#sendBtn:hover {
+font-size:45px;
+color:#6699ff;
+border-radius:100px;
+}
+#sendBtn:pressed {
+font-size:40px;
+color:#6699ff;
+border-radius:25px;
+}
+#msgEdit {
+border-width: 2px;
+border-radius: 10px;
+border-style: solid;
+border-color: #eeeeee;
+background-color: #ffffee;
+color: #000000;
+}
+#settingBtn,#newServerBtn,#server0 {
+font-size: 45px;
+color:#6699cc;
+border-radius:100px;
+}
+#settingBtn:hover,#newServerBtn:hover,#server0:hover {
+font-size:45px;
+color:#6699ff;
+border-radius:100px;
+}
+#settingBtn:pressed,#newServerBtn:pressed,#server0:pressed {
+font-size:40px;
+color:#6699ff;
+border-radius:100px;
+}
+#serverBox {
+border-radius:100px;
+}
