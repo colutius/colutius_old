@@ -1,0 +1,44 @@
+#include "server.hh"
+
+Server::Server()
+{
+}
+Server::~Server()
+{
+}
+bool Server::connect()
+{
+    this->socket = new Socket;
+    if (this->socket->connect(this->host, this->port))
+    {
+        qDebug() << "连接成功！";
+        if (this->socket->login(this->nick, this->user))
+        {
+            qDebug() << "登录成功！";
+            //开启消息接收线程
+            this->thread = new Thread(this->socket);
+            this->thread->start();
+        }
+        else
+        {
+            qDebug() << "登录失败！";
+            return false;
+        }
+        return true;
+    }
+    else
+    {
+        qDebug() << "连接失败！";
+        return false;
+    }
+}
+
+//发送消息
+void Server::sendMsg(QString msg)
+{
+    this->socket->sendMsg(msg);
+}
+
+void Server::receiveData(QString msg)
+{
+}
