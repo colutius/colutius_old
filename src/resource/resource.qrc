@@ -3,7 +3,7 @@
         <file>Login.qss</file>
         <file>Widget.qss</file>
     </qresource>
-    <qresource prefix="/iconfont">
+    <qresource prefix="/font">
         <file>iconfont/demo_index.html</file>
         <file>iconfont/demo.css</file>
         <file>iconfont/iconfont.css</file>

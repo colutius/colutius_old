@@ -1,41 +1,36 @@
-#sendBtn {
+QPushButton {
 font-size: 45px;
 color:#6699cc;
-border-radius:100px;
+border-style: none;
 }
-#sendBtn:hover {
+QPushButton:hover {
 font-size:45px;
 color:#6699ff;
-border-radius:100px;
+border-style: none;
 }
-#sendBtn:pressed {
+QPushButton:pressed {
 font-size:40px;
 color:#6699ff;
-border-radius:25px;
+border-style: none;
 }
+
 #msgEdit {
 border-width: 2px;
 border-radius: 10px;
+font-size:20px;
 border-style: solid;
-border-color: #eeeeee;
-background-color: #ffffee;
-color: #000000;
+border-color: #333333;
+background-color: #444444;
+color: #ffffff;
 }
-#settingBtn,#newServerBtn,#server0 {
-font-size: 45px;
-color:#6699cc;
-border-radius:100px;
-}
-#settingBtn:hover,#newServerBtn:hover,#server0:hover {
-font-size:45px;
-color:#6699ff;
-border-radius:100px;
-}
-#settingBtn:pressed,#newServerBtn:pressed,#server0:pressed {
-font-size:40px;
-color:#6699ff;
-border-radius:100px;
-}
+
 #serverBox {
-border-radius:100px;
+border-style: none;
+}
+QListWidget {
+border-style: none;
+}
+
+#Widget {
+background-color:#3e3e3e;
 }
