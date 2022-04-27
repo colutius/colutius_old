@@ -2,6 +2,8 @@
 
 Server::Server()
 {
+    this->socket = new Socket;
+    this->thread = new Thread(this->socket);
     this->serverItem = new QListWidgetItem;
     this->serverItem->setTextAlignment(4);
     // this->serverAction = new QAction;
@@ -19,7 +21,6 @@ Server::~Server()
 //连接服务器
 bool Server::connect()
 {
-    this->socket = new Socket;
     if (this->socket->connect(this->host, this->port))
     {
         qDebug() << "连接成功！";
@@ -27,7 +28,6 @@ bool Server::connect()
         {
             qDebug() << "登录成功！";
             //开启消息接收线程
-            this->thread = new Thread(this->socket);
             this->thread->start();
         }
         else
