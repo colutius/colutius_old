@@ -23,7 +23,7 @@ class Server
     Server();
     ~Server();
 
-    bool connect();            //连接服务器
-    void sendMsg(QString msg); //发送消息
-    void receiveData(QString msg);
+    bool connect();                //连接服务器
+    void sendMsg(QString msg);     //发送消息
+    void receiveData(QString msg); //接收消息
 };

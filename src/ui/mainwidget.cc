@@ -21,6 +21,7 @@ MainWidget::~MainWidget()
     delete ui;
 }
 
+//初始化UI
 void MainWidget::initUI()
 {
     //禁用侧边栏滚动条
@@ -30,8 +31,9 @@ void MainWidget::initUI()
     int fontId = QFontDatabase::addApplicationFont(":/font/iconfont/iconfont.ttf");
     QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
     const auto &fontname = fontFamilies.at(0);
-    this->iconfont.setFamily(fontname);
-    this->iconfont.setPointSize(40);
+    QFont iconfont;
+    iconfont.setFamily(fontname);
+    iconfont.setPointSize(40);
     //设置图标
     ui->sendBtn->setFont(iconfont);
     ui->sendBtn->setText(QChar(0xe60c));
@@ -44,11 +46,12 @@ void MainWidget::initUI()
 //设置qss样式
 void MainWidget::setStyle()
 {
-    QFile qssfile(":/qss/Widget.qss"); //通过文件路径创建文件对象
-    qssfile.open(QFile::ReadOnly);     //文件打开方式
-    QString str = qssfile.readAll();   //获取qss中全部字符
-    this->setStyleSheet(str);          //设置样式表
+    QFile qssfile(":/qss/Widget.qss");
+    qssfile.open(QFile::ReadOnly);
+    QString str = qssfile.readAll();
+    this->setStyleSheet(str);
 }
+
 //初始化信号槽
 void MainWidget::initConnect()
 {
@@ -82,7 +85,8 @@ void MainWidget::sendMsg()
     ui->msgList->addItem(msgBubble);
 }
 
+//打开设置页
 void MainWidget::setting()
 {
-    this->settingPage = new Config;
+    this->settingPage = new Config(this);
 }

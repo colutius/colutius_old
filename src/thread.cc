@@ -7,11 +7,12 @@ Thread::Thread(Socket *socket)
 
 Thread::~Thread()
 {
-    this->stop();
-    this->wait();
+    this->stop(); //停止线程
+    this->wait(); //等待线程结束
     qDebug() << "thread exit!";
 }
 
+//线程函数
 void Thread::run()
 {
     while (this->runFlag)
@@ -23,7 +24,7 @@ void Thread::run()
         else
         {
             // qDebug() << "接收到数据" + receiveData();
-            //  TODO显示接收到的消息
+            // TODO显示接收到的消息
         }
     }
 }

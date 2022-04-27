@@ -15,6 +15,8 @@ Server::~Server()
     delete thread;
     delete socket;
 }
+
+//连接服务器
 bool Server::connect()
 {
     this->socket = new Socket;
@@ -48,6 +50,7 @@ void Server::sendMsg(QString msg)
     this->socket->sendMsg(msg);
 }
 
+//接收消息
 void Server::receiveData(QString msg)
 {
 }

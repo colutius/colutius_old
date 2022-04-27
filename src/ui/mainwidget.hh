@@ -18,7 +18,6 @@ class MainWidget : public QWidget
     Q_OBJECT
 
   public:
-    QFont iconfont;
     QList<Server *> serverList; //服务器列表
 
     LoginWidget *loginPage; //登陆窗口实例
@@ -26,6 +25,7 @@ class MainWidget : public QWidget
 
     explicit MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
+
     void setStyle();    //设置qss样式
     void initUI();      //初始化界面
     void initConnect(); //初始化信号槽

@@ -8,9 +8,11 @@ class Thread : public QThread
   public:
     bool runFlag = true;
     Socket *socket;
+
     Thread(Socket *socket);
     ~Thread();
-    void run();
-    void stop();
+
+    void run();            //线程函数
+    void stop();           //停止线程
     QString receiveData(); //接收数据
 };
