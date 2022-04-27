@@ -4,6 +4,11 @@ Thread::Thread(Socket *socket)
 {
     this->socket = socket;
 }
+
+Thread::~Thread()
+{
+    this->exit();
+}
 void Thread::run()
 {
     while (true)

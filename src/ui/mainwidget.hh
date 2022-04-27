@@ -14,8 +14,7 @@ class MainWidget : public QWidget
     Q_OBJECT
 
   public:
-    Server *serverList[50]; //服务器列表
-    int serverNum;          //服务器数目
+    QList<Server *> serverList; //服务器列表
 
     LoginWidget *w; //登陆窗口实例
 

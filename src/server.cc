@@ -8,6 +8,9 @@ Server::Server()
 }
 Server::~Server()
 {
+    delete serverBtn;
+    delete thread;
+    delete socket;
 }
 bool Server::connect()
 {

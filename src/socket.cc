@@ -3,7 +3,10 @@
 Socket::Socket()
 {
 }
-
+Socket::~Socket()
+{
+    this->closeConnect();
+}
 bool Socket::initSocket()
 {
     // TODO初始化socket
@@ -15,7 +18,10 @@ bool Socket::connect(QString host, int port)
     // TODO连接到服务器
     return true;
 }
-
+bool Socket::closeConnect()
+{
+    return true;
+}
 bool Socket::login(QString nick, QString user)
 {
     // TODO登录到服务器
