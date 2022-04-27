@@ -1,9 +1,10 @@
 #pragma once
 #include "socket.hh"
 #include "thread.hh"
+#include <QAction>
+#include <QListWidgetItem>
 #include <QPushButton>
 #include <QString>
-
 class Server
 {
   public:
@@ -12,7 +13,9 @@ class Server
     QString nick; //昵称
     QString user; //用户
 
-    QPushButton *serverBtn;
+    QListWidgetItem *serverItem;
+    // QAction *serverAction;
+    // QPushButton *serverBtn;
 
     Socket *socket;
     Thread *thread; //消息监听线程

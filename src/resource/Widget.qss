@@ -24,13 +24,16 @@ background-color: #444444;
 color: #ffffff;
 }
 
-#serverBox {
+#serverList {
 border-style: none;
-}
-QListWidget {
-border-style: none;
+background-color:#343434;
 }
 
-#Widget {
-background-color:#3e3e3e;
+QListWidget {
+border-style: none;
+background-color:#2e2f30;
+}
+
+#MainWidget {
+background-color:#343434;
 }

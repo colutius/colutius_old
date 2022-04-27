@@ -6,7 +6,9 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MainWidget
 {
     ui->setupUi(this);
     this->setWindowTitle("Colutius");
+    initUI();
     initConnect();
+    setStyle();
 }
 
 MainWidget::~MainWidget()
@@ -19,10 +21,40 @@ MainWidget::~MainWidget()
     delete ui;
 }
 
+void MainWidget::initUI()
+{
+    //禁用侧边栏滚动条
+    // ui->serverList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // ui->serverList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //加载字体图标库
+    int fontId = QFontDatabase::addApplicationFont(":/font/iconfont/iconfont.ttf");
+    QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
+    const auto &fontname = fontFamilies.at(0);
+    this->iconfont.setFamily(fontname);
+    this->iconfont.setPointSize(40);
+    //设置图标
+    ui->sendBtn->setFont(iconfont);
+    ui->sendBtn->setText(QChar(0xe60c));
+    ui->addServerBtn->setFont(iconfont);
+    ui->addServerBtn->setText(QChar(0xe696));
+    ui->settingBtn->setFont(iconfont);
+    ui->settingBtn->setText(QChar(0xe8b8));
+}
+
+//设置qss样式
+void MainWidget::setStyle()
+{
+    QFile qssfile(":/qss/Widget.qss"); //通过文件路径创建文件对象
+    qssfile.open(QFile::ReadOnly);     //文件打开方式
+    QString str = qssfile.readAll();   //获取qss中全部字符
+    this->setStyleSheet(str);          //设置样式表
+}
 //初始化信号槽
 void MainWidget::initConnect()
 {
     connect(ui->addServerBtn, &QPushButton::clicked, this, &MainWidget::addServer);
+    connect(ui->sendBtn, &QPushButton::clicked, this, &MainWidget::sendMsg);
+    connect(ui->settingBtn, &QPushButton::clicked, this, &MainWidget::setting);
 }
 
 //添加服务器
@@ -33,8 +65,8 @@ void MainWidget::addServer()
     this->serverList.append(newServer);
 
     //打开登录窗口获取服务器信息
-    w = new LoginWidget(newServer);
-    ui->serverBoxLayout->addWidget(newServer->serverBtn);
+    this->loginPage = new LoginWidget(newServer);
+    ui->serverList->addItem(newServer->serverItem);
 }
 
 //发送消息
@@ -44,5 +76,13 @@ void MainWidget::sendMsg()
     // TODO判断当前所在服务器及频道
     int currentServerIndex = 0;
     // 发送消息
-    serverList[currentServerIndex]->sendMsg(msg);
+    serverList.at(currentServerIndex)->sendMsg(msg);
+    QListWidgetItem *msgBubble = new QListWidgetItem(msg);
+    msgBubble->setTextAlignment(2);
+    ui->msgList->addItem(msgBubble);
+}
+
+void MainWidget::setting()
+{
+    this->settingPage = new Config;
 }

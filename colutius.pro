@@ -13,6 +13,7 @@ SOURCES += \
     src/server.cc \
     src/socket.cc \
     src/thread.cc \
+    src/ui/config.cc \
     src/ui/loginwidget.cc \
     src/ui/mainwidget.cc \
 
@@ -20,10 +21,12 @@ HEADERS += \
     src/server.hh \
     src/socket.hh \
     src/thread.hh \
+    src/ui/config.hh \
     src/ui/loginwidget.hh \
     src/ui/mainwidget.hh \
 
 FORMS += \
+    src/ui/config.ui \
     src/ui/loginwidget.ui \
     src/ui/mainwidget.ui \
 

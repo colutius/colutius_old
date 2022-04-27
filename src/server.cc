@@ -2,13 +2,16 @@
 
 Server::Server()
 {
-    this->serverBtn = new QPushButton;
-    this->serverBtn->setMaximumSize(80, 80);
-    this->serverBtn->setMinimumSize(80, 80);
+    this->serverItem = new QListWidgetItem;
+    this->serverItem->setTextAlignment(4);
+    // this->serverAction = new QAction;
+    // this->serverBtn = new QPushButton;
+    // this->serverBtn->setMaximumSize(35, 50);
+    // this->serverBtn->setMinimumSize(35, 50);
 }
 Server::~Server()
 {
-    delete serverBtn;
+    delete serverItem;
     delete thread;
     delete socket;
 }

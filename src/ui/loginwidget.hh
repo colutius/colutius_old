@@ -19,7 +19,7 @@ class LoginWidget : public QWidget
 
     void initConnect();
     bool connect2Server();
+    Ui::LoginWidget *ui;
 
   private:
-    Ui::LoginWidget *ui;
 };
