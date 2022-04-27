@@ -1,6 +1,6 @@
-# Colutius - 
+# Colutius
 
-[English](README.md) [中文](README-CN.md)
+[[English](README.md)] [[中文](README-CN.md)]
 
 ```c++
    _____      _       _   _           
@@ -13,9 +13,7 @@
   qDebug() << "Hello World!";
 ```
 
-为补全Linux国内社交短板，我们致力于Deepin社区乃至整个Linux开发行业的IRC客户端
-
-当前处于筹备阶段，欢迎优秀的爱好者们加入以及提供宝贵的意见。
+### 一个跨平台，易用，美观的IRC客户端
 
 ## 自动化构建状态
 
@@ -26,6 +24,24 @@
 |[License][license-link]| [Release][release-link]| [Download][download-link] | [Stars][stars-link] |
 |-------------------|-----------------------|-------------------|------------|
 |![license-badge] |![release-badge] |![download-badge] |![stars-badge] |
+
+## 手动构建
+- 克隆仓库
+```bash
+git clone https://github.com/colutius/colutius.git
+cd colutius
+```
+- 开始构建
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+- 运行软件
+```bash
+./colutius
+```
 
 [windows-link]: https://github.com/colutius/colutius/actions/workflows/Windows.yml
 [windows-badge]: https://github.com/colutius/colutius/actions/workflows/Windows.yml/badge.svg

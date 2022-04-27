@@ -1,6 +1,6 @@
-# Colutius - 
+# Colutius
 
-[English](README.md) [中文](docs/README-CN.md)
+[[English](README.md)] [[中文](docs/README-CN.md)]
 
 Welcome to the
 
@@ -14,7 +14,7 @@ Welcome to the
   
   qDebug() << "Hello World!";
 ```
-
+### A cross-platform, easy-to-use, beautiful IRC client
 
 ## Automate builds
 
@@ -25,6 +25,25 @@ Welcome to the
 |[License][license-link]| [Release][release-link]| [Download][download-link] | [Stars][stars-link] |
 |-------------------|-----------------------|-------------------|------------|
 |![license-badge] |![release-badge] |![download-badge] |![stars-badge] |
+
+## Build manually
+- Clone the repository
+```bash
+git clone https://github.com/colutius/colutius.git
+cd colutius
+```
+- Start build
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+- Run the program
+```bash
+./colutius
+```
+
 
 [windows-link]: https://github.com/colutius/colutius/actions/workflows/Windows.yml
 [windows-badge]: https://github.com/colutius/colutius/actions/workflows/Windows.yml/badge.svg
