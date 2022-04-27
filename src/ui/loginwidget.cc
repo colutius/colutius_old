@@ -28,7 +28,7 @@ bool LoginWidget::connect2Server()
     this->server->port = ui->portEdit->text().toInt();
     this->server->nick = ui->nickEdit->text();
     this->server->user = ui->userEdit->text();
-
+    this->server->serverBtn->setText(this->server->host.at(0));
     //连接到服务器
     if (this->server->connect())
     {

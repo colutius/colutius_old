@@ -1,6 +1,7 @@
 #pragma once
 #include "socket.hh"
 #include "thread.hh"
+#include <QPushButton>
 #include <QString>
 
 class Server
@@ -10,6 +11,8 @@ class Server
     int port;     //服务器端口
     QString nick; //昵称
     QString user; //用户
+
+    QPushButton *serverBtn;
 
     Socket *socket;
     Thread *thread; //消息监听线程

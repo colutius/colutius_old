@@ -2,6 +2,9 @@
 
 Server::Server()
 {
+    this->serverBtn = new QPushButton;
+    this->serverBtn->setMaximumSize(80, 80);
+    this->serverBtn->setMinimumSize(80, 80);
 }
 Server::~Server()
 {

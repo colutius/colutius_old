@@ -27,6 +27,7 @@ void MainWidget::addServer()
     Server *newServer = new Server;
     this->serverList[this->serverNum] = newServer;
     w = new LoginWidget(newServer);
+    ui->serverBoxLayout->addWidget(newServer->serverBtn);
 }
 
 //发送消息
