@@ -88,5 +88,5 @@ void MainWidget::sendMsg()
 //打开设置页
 void MainWidget::setting()
 {
-    this->settingPage = new Config(this);
+    this->settingPage = new Config();
 }
