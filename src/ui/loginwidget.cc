@@ -1,7 +1,7 @@
 #include "loginwidget.hh"
 #include "ui_loginwidget.h"
 
-LoginWidget::LoginWidget(Server *server, QWidget *parent) : QWidget(parent), ui(new Ui::LoginWidget)
+LoginWidget::LoginWidget(Server *server, QWidget *parent) : QDialog(parent), ui(new Ui::LoginWidget)
 {
     //服务器图标随机颜色列表
     this->colors.append(QColor(0xdcff93));
@@ -17,7 +17,7 @@ LoginWidget::LoginWidget(Server *server, QWidget *parent) : QWidget(parent), ui(
     this->setWindowTitle("登录");
     ui->setupUi(this);
     initConnect();
-    this->show();
+    this->exec();
 }
 
 LoginWidget::~LoginWidget()

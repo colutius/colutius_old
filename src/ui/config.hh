@@ -1,20 +1,20 @@
 #pragma once
 
-#include <QWidget>
+#include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class Config;
 }
 
-class Config : public QWidget
+class Config : public QDialog
 {
     Q_OBJECT
 
-public:
+  public:
     explicit Config(QWidget *parent = nullptr);
     ~Config();
 
-private:
+  private:
     Ui::Config *ui;
 };
-

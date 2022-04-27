@@ -2,17 +2,17 @@
 
 #include "../server.hh"
 #include "../socket.hh"
+#include <QDialog>
 #include <QFont>
 #include <QFontDatabase>
 #include <QList>
 #include <QRandomGenerator>
-#include <QWidget>
 namespace Ui
 {
 class LoginWidget;
 }
 
-class LoginWidget : public QWidget
+class LoginWidget : public QDialog
 {
     Q_OBJECT
 
