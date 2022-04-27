@@ -7,11 +7,14 @@ Thread::Thread(Socket *socket)
 
 Thread::~Thread()
 {
-    this->exit();
+    this->stop();
+    this->wait();
+    qDebug() << "thread exit!";
 }
+
 void Thread::run()
 {
-    while (true)
+    while (this->runFlag)
     {
         if (receiveData().length() == 0)
         {
@@ -19,10 +22,15 @@ void Thread::run()
         }
         else
         {
-            qDebug() << "接收到数据" + receiveData();
-            // TODO显示接收到的消息
+            // qDebug() << "接收到数据" + receiveData();
+            //  TODO显示接收到的消息
         }
     }
+}
+
+void Thread::stop()
+{
+    this->runFlag = false;
 }
 QString Thread::receiveData()
 {
