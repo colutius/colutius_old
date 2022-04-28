@@ -1,30 +1,27 @@
 #include "socket.hh"
+#include "server.hh"
 
 Socket::Socket()
 {
+    this->tcpSocket = new QTcpSocket;
 }
 Socket::~Socket()
 {
     this->closeConnect();
-}
-
-//初始化socket
-bool Socket::initSocket()
-{
-    // TODO初始化socket
-    return true;
+    delete tcpSocket;
 }
 
 //建立连接
-bool Socket::connect(QString host, int port)
+void Socket::connect(QString host, int port)
 {
     // TODO连接到服务器
-    return true;
+    tcpSocket->connectToHost(host, port);
 }
 
 //断开连接
 bool Socket::closeConnect()
 {
+    this->tcpSocket->close();
     return true;
 }
 
@@ -32,7 +29,14 @@ bool Socket::closeConnect()
 bool Socket::login(QString nick, QString user)
 {
     // TODO登录到服务器
-    return true;
+    if (this->sendMsg("NICK " + nick))
+    {
+        if (this->sendMsg("USER " + user + " 8 * :Colutius IRC Client"))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 //接收消息
@@ -43,7 +47,9 @@ QString Socket::receiveData()
 }
 
 //发送消息
-void Socket::sendMsg(QString msg)
+int Socket::sendMsg(QString msg)
 {
+    QByteArray buf = msg.toUtf8().append("\n");
+    return tcpSocket->write(buf);
     // TODO发送消息
 }

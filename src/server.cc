@@ -3,7 +3,6 @@
 Server::Server()
 {
     this->socket = new Socket;
-    this->thread = new Thread(this->socket);
     this->serverItem = new QListWidgetItem;
     this->serverItem->setTextAlignment(4);
     // this->serverAction = new QAction;
@@ -14,43 +13,23 @@ Server::Server()
 Server::~Server()
 {
     delete serverItem;
-    delete thread;
     delete socket;
 }
 
 //连接服务器
-bool Server::connect()
+void Server::connect()
 {
-    if (this->socket->connect(this->host, this->port))
-    {
-        qDebug() << "连接成功！";
-        if (this->socket->login(this->nick, this->user))
-        {
-            qDebug() << "登录成功！";
-            //开启消息接收线程
-            this->thread->start();
-        }
-        else
-        {
-            qDebug() << "登录失败！";
-            return false;
-        }
-        return true;
-    }
-    else
-    {
-        qDebug() << "连接失败！";
-        return false;
-    }
+    this->socket->connect(this->host, this->port);
+}
+
+//登录
+bool Server::login()
+{
+    return this->socket->login(this->nick, this->user);
 }
 
 //发送消息
-void Server::sendMsg(QString msg)
+int Server::sendMsg(QString msg)
 {
-    this->socket->sendMsg(msg);
-}
-
-//接收消息
-void Server::receiveData(QString msg)
-{
+    return this->socket->sendMsg(msg);
 }

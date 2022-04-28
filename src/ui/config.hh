@@ -12,7 +12,7 @@ class Config : public QDialog
     Q_OBJECT
 
   public:
-    explicit Config(QWidget *parent = nullptr);
+    explicit Config(QDialog *parent = nullptr);
     ~Config();
 
   private:

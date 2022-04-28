@@ -31,6 +31,7 @@ class MainWidget : public QWidget
     void initConnect(); //初始化信号槽
     void addServer();   //添加服务器
     void sendMsg();     //发送消息
+    void receiveMsg();  //接收消息
     void setting();     //打开设置页
   private:
     Ui::MainWidget *ui;

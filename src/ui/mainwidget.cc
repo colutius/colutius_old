@@ -70,19 +70,40 @@ void MainWidget::addServer()
     //打开登录窗口获取服务器信息
     this->loginPage = new LoginWidget(newServer);
     ui->serverList->addItem(newServer->serverItem);
+    foreach (Server *server, this->serverList)
+    {
+        connect(server->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::receiveMsg);
+    }
 }
 
 //发送消息
 void MainWidget::sendMsg()
 {
-    QString msg = ui->msgEdit->text() + "\n";
+    QString msg = ui->msgEdit->text();
     // TODO判断当前所在服务器及频道
     int currentServerIndex = 0;
     // 发送消息
-    serverList.at(currentServerIndex)->sendMsg(msg);
-    QListWidgetItem *msgBubble = new QListWidgetItem(msg);
-    msgBubble->setTextAlignment(2);
-    ui->msgList->addItem(msgBubble);
+    if (serverList.at(currentServerIndex)->sendMsg(msg))
+    {
+        qDebug() << "发送成功";
+        QListWidgetItem *msgBubble = new QListWidgetItem(msg);
+        msgBubble->setTextAlignment(2);
+        ui->msgList->addItem(msgBubble);
+    }
+}
+
+//接收消息
+void MainWidget::receiveMsg()
+{
+    foreach (Server *server, this->serverList)
+    {
+        QByteArray buf = server->socket->tcpSocket->readAll();
+        if (buf.size() > 0)
+        {
+            QListWidgetItem *msg = new QListWidgetItem(buf);
+            ui->msgList->addItem(msg);
+        }
+    }
 }
 
 //打开设置页

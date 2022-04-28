@@ -1,7 +1,7 @@
 #include "loginwidget.hh"
 #include "ui_loginwidget.h"
 
-LoginWidget::LoginWidget(Server *server, QWidget *parent) : QDialog(parent), ui(new Ui::LoginWidget)
+LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(new Ui::LoginWidget)
 {
     //服务器图标随机颜色列表
     this->colors.append(QColor(0xdcff93));
@@ -96,7 +96,7 @@ void LoginWidget::initConnect()
 }
 
 //连接到服务器
-bool LoginWidget::connect2Server()
+void LoginWidget::connect2Server()
 {
     //获取窗口输入
     this->server->host = ui->hostEdit->text();
@@ -112,14 +112,21 @@ bool LoginWidget::connect2Server()
     letterFont.setPointSize(40);
     this->server->serverItem->setFont(letterFont);
     //设置server图标
-    this->server->serverItem->setText(getFontID(this->server->host.at(0)));
+    QStringList name = this->server->host.split(".");
+    this->server->serverItem->setText(getFontID(name.at(1)[0]));
     //设置随机颜色
     this->server->serverItem->setForeground(this->colors.at(QRandomGenerator::global()->generate() % colors.length()));
     //连接到服务器
-    if (this->server->connect())
+    this->server->connect();
+    connect(this->server->socket->tcpSocket, &QTcpSocket::connected, this, &LoginWidget::login);
+}
+
+void LoginWidget::login()
+{
+    qDebug() << "连接成功，正在登录……";
+    if (this->server->login())
     {
+        qDebug() << "登录成功！";
         this->close();
-        return true;
     }
-    return false;
 }

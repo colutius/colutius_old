@@ -16,8 +16,6 @@ add_executable(${PROJECT_NAME}
     src/server.cc
     src/socket.hh
     src/socket.cc
-    src/thread.hh
-    src/thread.cc
 
     src/ui/mainwidget.hh
     src/ui/mainwidget.cc
