@@ -12,7 +12,7 @@ Welcome to the
  | |___| (_) | | |_| | |_| | |_| \__ \
   \_____\___/|_|\__,_|\__|_|\__,_|___/
   
-  qDebug() << "Hello World!";
+  qDebug() << "Hello Colutius!";
 ```
 ### A cross-platform, easy-to-use, beautiful IRC client
 
