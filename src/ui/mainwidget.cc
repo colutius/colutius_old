@@ -106,7 +106,7 @@ void MainWidget::receiveMsg()
                 }
                 if (i.split(" ")[0] == "PING")
                 {
-                    server->sendMsg("PONG " + i + "\n");
+                    server->sendMsg("PONG " + i + "\r\n");
                 }
             }
         }
