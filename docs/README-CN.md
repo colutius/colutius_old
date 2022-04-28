@@ -1,6 +1,6 @@
 # Colutius
 
-[[English](README.md)] [[中文](README-CN.md)]
+[[English](../README.md)] [[中文](README-CN.md)]
 
 ```c++
    _____      _       _   _           
