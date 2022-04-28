@@ -19,9 +19,9 @@ LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(
     this->setWindowTitle("登录");
     ui->setupUi(this);
     initConnect();
-    this->show();
     //模态对话框
     this->setModal(true);
+    this->show();
 }
 
 LoginWidget::~LoginWidget()
@@ -29,7 +29,7 @@ LoginWidget::~LoginWidget()
     //没有点击连接，直接关闭对话框的时候，把server的内存释放了
     if (this->server->host == "#ColutiusYyds!")
     {
-        this->server->socket->tcpSocket.disconnect();
+        this->server->socket->tcpSocket->disconnect();
         delete server;
     }
     delete ui;

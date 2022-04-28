@@ -7,7 +7,7 @@ Socket::Socket()
 Socket::~Socket()
 {
     this->closeConnect();
-    delete this->tcpSocket->deleteLater();
+    delete this->tcpSocket;
 }
 
 //建立连接
