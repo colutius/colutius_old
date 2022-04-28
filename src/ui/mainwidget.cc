@@ -100,6 +100,10 @@ void MainWidget::receiveMsg()
         {
             QListWidgetItem *msg = new QListWidgetItem(buf);
             ui->msgList->addItem(msg);
+            if (QString(buf).split(" ")[0] == "PING")
+            {
+                server->sendMsg("PONG " + QString(buf).split(" ")[1]);
+            }
         }
     }
 }

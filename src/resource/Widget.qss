@@ -10,17 +10,17 @@ background-color:#343434;
 }
 
 /* 主界面按钮样式，取消边框 */
-QPushButton {
+#addServerBtn, #sendBtn, #settingBtn {
 font-size: 45px;
 color:#6699cc;
 border-style: none;
 }
-QPushButton:hover {
+#addServerBtn:hover, #sendBtn:hover, #settingBtn:hover {
 font-size:45px;
 color:#6699ff;
 border-style: none;
 }
-QPushButton:pressed {
+#addServerBtn:pressed, #sendBtn:pressed, #settingBtn:pressed {
 font-size:40px;
 color:#6699ff;
 border-style: none;
