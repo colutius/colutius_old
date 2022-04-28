@@ -55,7 +55,7 @@ void MainWidget::setStyle()
 //初始化信号槽
 void MainWidget::initConnect()
 {
-    connect(ui->addServerBtn, &QPushButton::clicked, this, &MainWidget::addServer);
+    connect(ui->addServerBtn, &QPushButton::clicked, this, &MainWidget::login);
     connect(ui->sendBtn, &QPushButton::clicked, this, &MainWidget::sendMsg);
     connect(ui->settingBtn, &QPushButton::clicked, this, &MainWidget::setting);
 }
@@ -63,17 +63,15 @@ void MainWidget::initConnect()
 //添加服务器
 void MainWidget::addServer()
 {
-    Server *newServer = new Server; //创建新的Server实例
+    //跳转结束，马上删除凑和连接
+    this->newServer->socket->tcpSocket->disconnect(this);
 
-    this->serverList.append(newServer);
-
-    //打开登录窗口获取服务器信息
-    this->loginPage = new LoginWidget(newServer);
-    ui->serverList->addItem(newServer->serverItem);
-    foreach (Server *server, this->serverList)
-    {
-        connect(server->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::receiveMsg);
-    }
+    //添加到服务器列表
+    this->serverList.append(this->newServer);
+    //添加到侧边栏
+    ui->serverList->addItem(this->newServer->serverItem);
+    connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::receiveMsg);
+    this->newServer = nullptr;
 }
 
 //发送消息
@@ -110,4 +108,19 @@ void MainWidget::receiveMsg()
 void MainWidget::setting()
 {
     this->settingPage = new Config();
+}
+
+//打开登录页
+void MainWidget::login()
+{
+    this->newServer = new Server;
+    this->loginPage = new LoginWidget(newServer);
+
+    // addServer();
+    //实测只有这个readyRead信号能用，其他像connected甚至自定义信号都用不了
+    //不知道什么原因！！！！！！焯！
+    //因为连接到服务器服务器肯定会发送数据，这个信号也一定会被触发，所以可以用这个信号凑和
+    //不过这是一次性的用法，跳转之后应该马上删除
+    //如果没有跳转，delete server的时候其中的socket也会delete，不用关心
+    connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::addServer);
 }

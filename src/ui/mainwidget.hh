@@ -19,9 +19,9 @@ class MainWidget : public QWidget
 
   public:
     QList<Server *> serverList; //服务器列表
-
-    LoginWidget *loginPage; //登陆窗口实例
-    Config *settingPage;    //设置窗口实例
+    Server *newServer;          //新建服务器实例
+    LoginWidget *loginPage;     //登陆窗口实例
+    Config *settingPage;        //设置窗口实例
 
     explicit MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
@@ -33,6 +33,7 @@ class MainWidget : public QWidget
     void sendMsg();     //发送消息
     void receiveMsg();  //接收消息
     void setting();     //打开设置页
+    void login();       //打开登录页
   private:
     Ui::MainWidget *ui;
 };

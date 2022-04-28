@@ -22,6 +22,12 @@ LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(
 
 LoginWidget::~LoginWidget()
 {
+    //没有点击连接，直接关闭对话框的时候，把server的内存释放了
+    if (this->server->host == "#ColutiusYyds!")
+    {
+        qDebug() << "server实例已删除";
+        delete server;
+    }
     delete ui;
 }
 

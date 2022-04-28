@@ -1,7 +1,7 @@
 #pragma once
 
+#include <QSslSocket>
 #include <QTcpSocket>
-
 class Socket
 {
   public:

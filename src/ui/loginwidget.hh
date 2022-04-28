@@ -15,6 +15,8 @@ class LoginWidget;
 class LoginWidget : public QDialog
 {
     Q_OBJECT
+  signals:
+    void connectBtnPressed();
 
   public:
     Server *server;       // server实例
@@ -26,6 +28,7 @@ class LoginWidget : public QDialog
     void initConnect();    //初始化信号槽
     void connect2Server(); //连接到服务器
     void login();          //登录
+
   private:
     Ui::LoginWidget *ui;
 };

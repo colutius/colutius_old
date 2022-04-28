@@ -2,8 +2,12 @@
 
 Server::Server()
 {
+    // 初始化一个特定host值，用于登录对话框析构判断
+    this->host = "#ColutiusYyds!";
+    // 初始化
     this->socket = new Socket;
     this->serverItem = new QListWidgetItem;
+    // QListWidgetItem居中显示
     this->serverItem->setTextAlignment(4);
     // this->serverAction = new QAction;
     // this->serverBtn = new QPushButton;
