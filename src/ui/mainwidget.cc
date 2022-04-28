@@ -95,14 +95,19 @@ void MainWidget::receiveMsg()
 {
     foreach (Server *server, this->serverList)
     {
-        QByteArray buf = server->socket->tcpSocket->readAll();
-        if (buf.size() > 0)
+        QStringList buf = QString(server->socket->tcpSocket->readAll()).split("\n");
+        if (buf.length() > 0)
         {
-            QListWidgetItem *msg = new QListWidgetItem(buf);
-            ui->msgList->addItem(msg);
-            if (QString(buf).split(" ")[0] == "PING")
+            foreach (QString i, buf)
             {
-                server->sendMsg("PONG " + QString(buf).split(" ")[1]);
+                if (!i.isEmpty())
+                {
+                    ui->msgList->addItem(i);
+                }
+                if (i.split(" ")[0] == "PING")
+                {
+                    server->sendMsg("PONG " + i + "\n");
+                }
             }
         }
     }
