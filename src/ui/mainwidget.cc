@@ -121,6 +121,6 @@ void MainWidget::login()
     //不知道什么原因！！！！！！焯！
     //因为连接到服务器服务器肯定会发送数据，这个信号也一定会被触发，所以可以用这个信号凑和
     //不过这是一次性的用法，跳转之后应该马上删除
-    //如果没有跳转，delete server的时候其中的socket也会delete，不用关心
+    //如果没有跳转，在对话框的析构函数中删除连接
     connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::addServer);
 }

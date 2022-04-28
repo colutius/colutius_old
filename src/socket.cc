@@ -1,5 +1,4 @@
 #include "socket.hh"
-#include "server.hh"
 
 Socket::Socket()
 {
@@ -8,7 +7,7 @@ Socket::Socket()
 Socket::~Socket()
 {
     this->closeConnect();
-    delete tcpSocket;
+    delete this->tcpSocket->deleteLater();
 }
 
 //建立连接
@@ -21,8 +20,12 @@ void Socket::connect(QString host, int port)
 //断开连接
 bool Socket::closeConnect()
 {
-    this->tcpSocket->close();
-    return true;
+    if (this->tcpSocket->isOpen())
+    {
+        this->tcpSocket->close();
+        return true;
+    }
+    return false;
 }
 
 //登录

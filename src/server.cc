@@ -16,8 +16,8 @@ Server::Server()
 }
 Server::~Server()
 {
-    delete serverItem;
-    delete socket;
+    delete this->serverItem;
+    delete this->socket;
 }
 
 //连接服务器

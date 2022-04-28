@@ -3,6 +3,8 @@
 
 LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(new Ui::LoginWidget)
 {
+    //关闭对话框时调用析构函数
+    this->setAttribute(Qt::WA_DeleteOnClose);
     //服务器图标随机颜色列表
     this->colors.append(QColor(0xdcff93));
     this->colors.append(QColor(0xff9b6a));
@@ -17,7 +19,9 @@ LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(
     this->setWindowTitle("登录");
     ui->setupUi(this);
     initConnect();
-    this->exec();
+    this->show();
+    //模态对话框
+    this->setModal(true);
 }
 
 LoginWidget::~LoginWidget()
@@ -25,7 +29,7 @@ LoginWidget::~LoginWidget()
     //没有点击连接，直接关闭对话框的时候，把server的内存释放了
     if (this->server->host == "#ColutiusYyds!")
     {
-        qDebug() << "server实例已删除";
+        this->server->socket->tcpSocket.disconnect();
         delete server;
     }
     delete ui;
