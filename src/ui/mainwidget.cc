@@ -58,6 +58,7 @@ void MainWidget::initConnect()
     connect(ui->addServerBtn, &QPushButton::clicked, this, &MainWidget::login);
     connect(ui->sendBtn, &QPushButton::clicked, this, &MainWidget::sendMsg);
     connect(ui->settingBtn, &QPushButton::clicked, this, &MainWidget::setting);
+    connect(ui->addChannelBtn, &QPushButton::clicked, this, &MainWidget::addChannel);
 }
 
 //添加服务器
@@ -70,6 +71,7 @@ void MainWidget::addServer()
     this->serverList.append(this->newServer);
     //添加到侧边栏
     ui->serverList->addItem(this->newServer->serverItem);
+    ui->serverList->setCurrentRow(this->serverList.size() - 1);
     connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::receiveMsg);
     this->newServer = nullptr;
 }
@@ -82,10 +84,13 @@ void MainWidget::sendMsg()
     {
         return;
     }
-    //获取输入框内容
-    QString msg = ui->msgEdit->text();
+
     // TODO 判断当前所在服务器及频道
-    int currentServerIndex = 0;
+    int currentServerIndex = ui->serverList->currentRow();
+    int currentChannelIndex = ui->channelList->currentRow();
+    //获取输入框内容
+    QString msg = "PRIVMSG " + this->serverList.at(currentServerIndex)->channelList.at(currentChannelIndex)->text() +
+                  " :" + ui->msgEdit->text();
     // 发送消息
     if (serverList.at(currentServerIndex)->sendMsg(msg))
     {
@@ -168,4 +173,21 @@ void MainWidget::login()
     //不过这是一次性的用法，跳转之后应该马上删除
     //如果没有跳转，在对话框的析构函数中删除连接
     connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::addServer);
+}
+
+void MainWidget::addChannel()
+{
+    QString channel = ui->channelEdit->text();
+    if (channel.isEmpty())
+    {
+        return;
+    }
+    int serverIndex = ui->serverList->currentRow();
+    if (this->serverList.at(serverIndex)->sendMsg("JOIN " + channel + "\r\n"))
+    {
+        auto *channelItem = new QListWidgetItem(channel);
+        this->serverList.at(serverIndex)->channelList.append(channelItem);
+        ui->channelList->addItem(channel);
+        ui->channelList->setCurrentRow(this->serverList.at(serverIndex)->channelList.size() - 1);
+    }
 }

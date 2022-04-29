@@ -35,6 +35,7 @@ class MainWidget : public QWidget
     void receiveMsg();  //接收消息
     void setting();     //打开设置页
     void login();       //打开登录页
+    void addChannel();  //添加频道
   private:
     Ui::MainWidget *ui;
 };

@@ -126,6 +126,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QLineEdit" name="channelEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="addChannelBtn">
          <property name="text">
           <string>添加频道</string>

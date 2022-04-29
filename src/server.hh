@@ -9,11 +9,11 @@ class Server : public QObject
 {
     Q_OBJECT
   public:
-    QString host = "#ColutiusYyds!"; //服务器地址
-    int port = 6667;                 //服务器端口
-    QString nick;                    //昵称
-    QString user;                    //用户
-
+    QString host = "#ColutiusYyds!";      //服务器地址
+    int port = 6667;                      //服务器端口
+    QString nick;                         //昵称
+    QString user;                         //用户
+    QList<QListWidgetItem *> channelList; //频道列表
     bool isReadyRead = false;
     QListWidgetItem *serverItem;
     // QAction *serverAction;
