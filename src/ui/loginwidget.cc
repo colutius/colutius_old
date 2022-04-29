@@ -16,8 +16,8 @@ LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(
     this->colors.append(QColor(0xed9678));
 
     this->server = server;
-    this->setWindowTitle("登录");
     ui->setupUi(this);
+    this->setWindowTitle("登录");
     initConnect();
     //模态对话框
     this->setModal(true);

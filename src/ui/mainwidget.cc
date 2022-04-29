@@ -138,11 +138,11 @@ void MainWidget::receiveMsg()
             else
             {
                 QFont msgFont;
-                msgFont.setPointSize(3);
+                msgFont.setPointSize(20);
                 QListWidgetItem *temp = new QListWidgetItem;
                 temp->setFont(msgFont);
                 temp->setText(i);
-                temp->setTextAlignment(4);
+                temp->setTextAlignment(1);
                 ui->msgList->addItem(temp);
             }
         }

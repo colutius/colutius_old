@@ -42,17 +42,9 @@ bool Socket::login(QString nick, QString user)
     return false;
 }
 
-//接收消息
-QString Socket::receiveData()
-{
-    // TODO从服务器接收消息
-    return "hello";
-}
-
 //发送消息
 int Socket::sendMsg(QString msg)
 {
     QByteArray buf = msg.toUtf8().append("\n");
     return tcpSocket->write(buf);
-    // TODO发送消息
 }
