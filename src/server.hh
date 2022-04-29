@@ -9,10 +9,10 @@ class Server : public QObject
 {
     Q_OBJECT
   public:
-    QString host; //服务器地址
-    int port;     //服务器端口
-    QString nick; //昵称
-    QString user; //用户
+    QString host = "#ColutiusYyds!"; //服务器地址
+    int port = 6667;                 //服务器端口
+    QString nick;                    //昵称
+    QString user;                    //用户
 
     bool isReadyRead = false;
     QListWidgetItem *serverItem;
@@ -22,11 +22,10 @@ class Server : public QObject
     Socket *socket;
 
     explicit Server(QObject *parent = nullptr);
-    ~Server();
+    ~Server() override;
 
     void readyRead();
-    void connect(); //连接服务器
-    bool login();
-    int sendMsg(QString msg);      //发送消息
-    void receiveData(QString msg); //接收消息
+    void connect() const; //连接服务器
+    bool login() const;
+    int sendMsg(const QString &msg) const; //发送消息
 };

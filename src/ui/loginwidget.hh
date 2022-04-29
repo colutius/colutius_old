@@ -15,15 +15,13 @@ class LoginWidget;
 class LoginWidget : public QDialog
 {
     Q_OBJECT
-  signals:
-    void connectBtnPressed();
 
   public:
     Server *server;       // server实例
     QList<QColor> colors; //随机颜色列表
 
     explicit LoginWidget(Server *server, QDialog *parent = nullptr);
-    ~LoginWidget();
+    ~LoginWidget() override;
 
     void initConnect();    //初始化信号槽
     void connect2Server(); //连接到服务器

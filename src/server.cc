@@ -2,8 +2,6 @@
 
 Server::Server(QObject *parent) : QObject{parent}
 {
-    // 初始化一个特定host值，用于登录对话框析构判断
-    this->host = "#ColutiusYyds!";
     // 初始化
     this->socket = new Socket;
     this->serverItem = new QListWidgetItem;
@@ -22,19 +20,19 @@ Server::~Server()
 }
 
 //连接服务器
-void Server::connect()
+void Server::connect() const
 {
     this->socket->connect(this->host, this->port);
 }
 
 //登录
-bool Server::login()
+bool Server::login() const
 {
     return this->socket->login(this->nick, this->user);
 }
 
 //发送消息
-int Server::sendMsg(QString msg)
+int Server::sendMsg(const QString &msg) const
 {
     return this->socket->sendMsg(msg);
 }

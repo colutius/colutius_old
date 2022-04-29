@@ -11,14 +11,14 @@ Socket::~Socket()
 }
 
 //建立连接
-void Socket::connect(QString host, int port)
+void Socket::connect(const QString &host, int port) const
 {
     // TODO连接到服务器
     tcpSocket->connectToHost(host, port);
 }
 
 //断开连接
-bool Socket::closeConnect()
+bool Socket::closeConnect() const
 {
     if (this->tcpSocket->isOpen())
     {
@@ -29,7 +29,7 @@ bool Socket::closeConnect()
 }
 
 //登录
-bool Socket::login(QString nick, QString user)
+bool Socket::login(const QString &nick, const QString &user) const
 {
     // TODO登录到服务器
     if (this->sendMsg("NICK " + nick))
@@ -43,8 +43,9 @@ bool Socket::login(QString nick, QString user)
 }
 
 //发送消息
-int Socket::sendMsg(QString msg)
+int Socket::sendMsg(const QString &msg) const
 {
     QByteArray buf = msg.toUtf8().append("\n");
+    // TODO 有一处警告
     return tcpSocket->write(buf);
 }

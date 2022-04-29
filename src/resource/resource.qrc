@@ -2,7 +2,6 @@
     <qresource prefix="/qss">
         <file>Login.qss</file>
         <file>Widget.qss</file>
-        <file>serverstyle.qss</file>
     </qresource>
     <qresource prefix="/font">
         <file>iconfont/iconfont.json</file>

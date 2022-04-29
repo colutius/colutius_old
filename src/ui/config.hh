@@ -13,7 +13,7 @@ class Config : public QDialog
 
   public:
     explicit Config(QDialog *parent = nullptr);
-    ~Config();
+    ~Config() override;
 
   private:
     Ui::Config *ui;

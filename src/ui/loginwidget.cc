@@ -95,8 +95,6 @@ QChar getFontID(QChar letter)
     default:
         return QChar(0xeb94);
     }
-
-    return letter;
 }
 
 //初始化信号槽
@@ -125,6 +123,7 @@ void LoginWidget::connect2Server()
     QStringList name = this->server->host.split(".");
     this->server->serverItem->setText(getFontID(name.at(1)[0]));
     //设置随机颜色
+    // TODO 这里有个CLion警告，不会修
     this->server->serverItem->setForeground(this->colors.at(QRandomGenerator::global()->generate() % colors.length()));
     //连接到服务器
     this->server->connect();

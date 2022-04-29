@@ -18,13 +18,14 @@ class MainWidget : public QWidget
     Q_OBJECT
 
   public:
-    QList<Server *> serverList; //服务器列表
-    Server *newServer;          //新建服务器实例
-    LoginWidget *loginPage;     //登陆窗口实例
-    Config *settingPage;        //设置窗口实例
+    QList<Server *> serverList;  //服务器列表
+    Server *newServer = nullptr; //新建服务器实例
+    // TODO 这里警告提示已匹配但从未访问
+    LoginWidget *loginPage = nullptr; //登陆窗口实例
+    Config *settingPage = nullptr;    //设置窗口实例
 
     explicit MainWidget(QWidget *parent = nullptr);
-    ~MainWidget();
+    ~MainWidget() override;
 
     void setStyle();    //设置qss样式
     void initUI();      //初始化界面

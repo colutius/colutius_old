@@ -78,19 +78,19 @@ void MainWidget::addServer()
 void MainWidget::sendMsg()
 {
     //未添加服务器忽略
-    if (!this->serverList.size())
+    if (this->serverList.isEmpty())
     {
         return;
     }
     //获取输入框内容
     QString msg = ui->msgEdit->text();
-    // TODO判断当前所在服务器及频道
+    // TODO 判断当前所在服务器及频道
     int currentServerIndex = 0;
     // 发送消息
     if (serverList.at(currentServerIndex)->sendMsg(msg))
     {
         qDebug() << "发送成功";
-        QListWidgetItem *msgBubble = new QListWidgetItem(msg);
+        auto *msgBubble = new QListWidgetItem(msg);
         msgBubble->setTextAlignment(2);
         ui->msgList->addItem(msgBubble);
     }
@@ -139,7 +139,7 @@ void MainWidget::receiveMsg()
             {
                 QFont msgFont;
                 msgFont.setPointSize(20);
-                QListWidgetItem *temp = new QListWidgetItem;
+                auto *temp = new QListWidgetItem;
                 temp->setFont(msgFont);
                 temp->setText(i);
                 temp->setTextAlignment(1);
