@@ -17,6 +17,10 @@ Server::~Server()
 {
     delete this->serverItem;
     delete this->socket;
+    foreach (QListWidgetItem *channelItem, this->channelList)
+    {
+        delete channelItem;
+    }
 }
 
 //连接服务器

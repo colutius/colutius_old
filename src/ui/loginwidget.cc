@@ -106,6 +106,7 @@ void LoginWidget::initConnect()
 //连接到服务器
 void LoginWidget::connect2Server()
 {
+    ui->connectBtn->setEnabled(false);
     //获取窗口输入
     this->server->host = ui->hostEdit->text();
     this->server->port = ui->portEdit->text().toInt();

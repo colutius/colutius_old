@@ -14,9 +14,13 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MainWidget
 MainWidget::~MainWidget()
 {
     //释放Server内存
-    foreach (Server *server, this->serverList)
+    if (!this->serverList.isEmpty())
     {
-        delete server;
+        foreach (Server *server, this->serverList)
+        {
+            //直接delete的话会导致退出时段错误
+            server->deleteLater();
+        }
     }
     delete ui;
 }
@@ -59,6 +63,7 @@ void MainWidget::initConnect()
     connect(ui->sendBtn, &QPushButton::clicked, this, &MainWidget::sendMsg);
     connect(ui->settingBtn, &QPushButton::clicked, this, &MainWidget::setting);
     connect(ui->addChannelBtn, &QPushButton::clicked, this, &MainWidget::addChannel);
+    connect(ui->serverList, &QListWidget::currentItemChanged, this, &MainWidget::refreshChannelList);
 }
 
 //添加服务器
@@ -85,7 +90,7 @@ void MainWidget::sendMsg()
         return;
     }
 
-    // TODO 判断当前所在服务器及频道
+    // 判断当前所在服务器及频道
     int currentServerIndex = ui->serverList->currentRow();
     int currentChannelIndex = ui->channelList->currentRow();
     //获取输入框内容
@@ -175,19 +180,48 @@ void MainWidget::login()
     connect(this->newServer->socket->tcpSocket, &QTcpSocket::readyRead, this, &MainWidget::addServer);
 }
 
+//添加频道
 void MainWidget::addChannel()
 {
+    //无服务器啥也不做
+    if (this->serverList.isEmpty())
+    {
+        return;
+    }
+    //获取频道名称
     QString channel = ui->channelEdit->text();
+    //输入框为空啥也不做
     if (channel.isEmpty())
     {
         return;
     }
+    //获取当前选中服务器
     int serverIndex = ui->serverList->currentRow();
+    //发送JOIN信号
     if (this->serverList.at(serverIndex)->sendMsg("JOIN " + channel + "\r\n"))
     {
-        auto *channelItem = new QListWidgetItem(channel);
+        //界面添加频道
+        this->channelItem = new QListWidgetItem(channel);
         this->serverList.at(serverIndex)->channelList.append(channelItem);
-        ui->channelList->addItem(channel);
+        ui->channelList->addItem(channelItem);
         ui->channelList->setCurrentRow(this->serverList.at(serverIndex)->channelList.size() - 1);
+    }
+}
+
+void MainWidget::refreshChannelList()
+{
+    //清空频道列表
+    //不能用ui.channelList->clear();clear会释放所有Item的内存，之后就用不了了
+    for (int i = 0; i < ui->channelList->count(); i++)
+    {
+        ui->channelList->takeItem(i);
+    }
+    // ui->channelList->clear();
+    //  判断当前所在服务器
+    int currentServerIndex = ui->serverList->currentRow();
+    //添加当前选中服务器加入的频道到列表显示
+    foreach (QListWidgetItem *channel, this->serverList.at(currentServerIndex)->channelList)
+    {
+        ui->channelList->addItem(channel);
     }
 }
