@@ -8,33 +8,27 @@ set(CMAKE_AUTOUIC ON)
 
 set(QT_VERSION 5)
 set(REQUIRED_LIBS Core Gui Widgets Network)
-set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network )
+set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 add_executable(${PROJECT_NAME}
-    src/main.cc
-    src/server.hh
-    src/server.cc
-    src/socket.hh
-    src/socket.cc
+        src/main.cc
+        src/server.hh
+        src/server.cc
+        src/socket.hh
+        src/socket.cc
 
-    src/ui/mainwidget.hh
-    src/ui/mainwidget.cc
-    src/ui/mainwidget.ui
-    src/ui/loginwidget.hh
-    src/ui/loginwidget.cc
-    src/ui/loginwidget.ui
-    src/ui/config.hh
-    src/ui/config.cc
-    src/ui/config.ui
+        src/ui/mainwidget.hh
+        src/ui/mainwidget.cc
+        src/ui/mainwidget.ui
+        src/ui/loginwidget.hh
+        src/ui/loginwidget.cc
+        src/ui/loginwidget.ui
+        src/ui/config.hh
+        src/ui/config.cc
+        src/ui/config.ui
 
-    src/resource/resource.qrc
-)
-
-
-if (NOT CMAKE_PREFIX_PATH)
-    message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
-            "(-DCMAKE_PREFIX_PATH=\"path/to/Qt/lib/cmake\" or -DCMAKE_PREFIX_PATH=/usr/include/{host}/qt{version}/ on Ubuntu)")
-endif ()
+        src/resource/resource.qrc
+        )
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
