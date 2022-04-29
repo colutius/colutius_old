@@ -156,7 +156,12 @@ void MainWidget::receiveMsg()
             //所以先判断一下length保险一些
             if (msg.length() > 1 && msg[1] == "PRIVMSG")
             {
-                ui->msgList->addItem(msg[0].split("!")[0] + msg[3]);
+                QString mainMsg;
+                for (int i = 3; i < msg.length(); i++)
+                {
+                    mainMsg += (msg[i] + " ");
+                }
+                ui->msgList->addItem(msg[0].split("!")[0] + mainMsg);
                 continue;
             }
             //服务器状态信息

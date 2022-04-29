@@ -11,17 +11,17 @@ background-color:#343434;
 
 /* 主界面按钮样式，取消边框 */
 #addServerBtn, #sendBtn, #settingBtn {
-font-size: 45px;
+font-size: 40px;
 color:#6699cc;
 border-style: none;
 }
 #addServerBtn:hover, #sendBtn:hover, #settingBtn:hover {
-font-size:45px;
+font-size:40px;
 color:#6699ff;
 border-style: none;
 }
 #addServerBtn:pressed, #sendBtn:pressed, #settingBtn:pressed {
-font-size:40px;
+font-size:35px;
 color:#6699ff;
 border-style: none;
 }
@@ -41,6 +41,7 @@ color: #ffffff;
 #channelList{
 border-style: none;
 background-color:#2e2f30;
+border-radius: 10px;
 }
 
 /* 消息列表样式 */
@@ -49,3 +50,22 @@ border-style: none;
 background-color:#2e2f30;
 }
 
+/* 服务器选中样式 */
+#serverList::item:hover {
+background-color: transparent;
+border-left: 3px solid #828282;
+}
+#serverList::item:selected {
+background-color: transparent;
+border-left: 3px solid #828282;
+}
+
+/* 频道列表选中样式 */
+#channelList::item:hover {
+background-color: transparent;
+border-bottom: 3px solid #828282;
+}
+#channelList::item:selected {
+background-color: transparent;
+border-bottom: 3px solid #707070;
+}
