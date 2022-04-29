@@ -1,6 +1,6 @@
 #include "server.hh"
 
-Server::Server()
+Server::Server(QObject *parent) : QObject{parent}
 {
     // 初始化一个特定host值，用于登录对话框析构判断
     this->host = "#ColutiusYyds!";
@@ -13,6 +13,7 @@ Server::Server()
     // this->serverBtn = new QPushButton;
     // this->serverBtn->setMaximumSize(35, 50);
     // this->serverBtn->setMinimumSize(35, 50);
+    QObject::connect(this->socket->tcpSocket, &QTcpSocket::readyRead, this, &Server::readyRead);
 }
 Server::~Server()
 {
@@ -36,4 +37,9 @@ bool Server::login()
 int Server::sendMsg(QString msg)
 {
     return this->socket->sendMsg(msg);
+}
+
+void Server::readyRead()
+{
+    this->isReadyRead = true;
 }

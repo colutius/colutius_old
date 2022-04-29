@@ -77,6 +77,12 @@ void MainWidget::addServer()
 //发送消息
 void MainWidget::sendMsg()
 {
+    //未添加服务器忽略
+    if (!this->serverList.size())
+    {
+        return;
+    }
+    //获取输入框内容
     QString msg = ui->msgEdit->text();
     // TODO判断当前所在服务器及频道
     int currentServerIndex = 0;
@@ -93,21 +99,51 @@ void MainWidget::sendMsg()
 //接收消息
 void MainWidget::receiveMsg()
 {
+    //遍历所有服务器
     foreach (Server *server, this->serverList)
     {
-        QStringList buf = QString(server->socket->tcpSocket->readAll()).split("\n");
-        if (buf.length() > 0)
+        if (!server->isReadyRead)
         {
-            foreach (QString i, buf)
+            continue;
+        }
+        //接收消息，isReadyRead复位
+        QStringList buf = QString(server->socket->tcpSocket->readAll()).split("\n");
+        server->isReadyRead = false;
+        //分别遍历处理每一行消息
+        foreach (QString i, buf)
+        {
+            //行非空
+            if (i.isEmpty())
             {
-                if (!i.isEmpty())
-                {
-                    ui->msgList->addItem(i);
-                }
-                if (i.split(" ")[0] == "PING")
-                {
-                    server->sendMsg("PONG " + i + "\r\n");
-                }
+                continue;
+            }
+            //一条消息以空格分隔
+            QStringList msg = i.split(" ");
+            // PING消息，直接回复，不打印
+            if (msg[0] == "PING")
+            {
+                server->sendMsg("PONG " + i + "\r\n");
+                continue;
+            }
+            //用户消息，接收并打印
+            //有时候接收到的数据会在其中随机某个地方多出来个\n
+            //导致有可能这一行用空格分隔之后只有一组，访问msg[1]会崩溃
+            //所以先判断一下length保险一些
+            if (msg.length() > 1 && msg[1] == "PRIVMSG")
+            {
+                ui->msgList->addItem(msg[0].split("!")[0] + msg[3]);
+                continue;
+            }
+            //服务器状态信息
+            else
+            {
+                QFont msgFont;
+                msgFont.setPointSize(3);
+                QListWidgetItem *temp = new QListWidgetItem;
+                temp->setFont(msgFont);
+                temp->setText(i);
+                temp->setTextAlignment(4);
+                ui->msgList->addItem(temp);
             }
         }
     }
