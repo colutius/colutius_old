@@ -227,11 +227,19 @@ void MainWidget::refreshChannelList()
 {
     //清空频道列表
     //不能用ui.channelList->clear();clear会释放所有Item的内存，之后就用不了了
-    //这里直接按数量来删除的话总会剩一个，实测+2之后可以删干净了
-    for (int i = 0; i < ui->channelList->count() + 2; ++i)
+    //用takeItem依次删除列表项
+    int count = ui->channelList->count();
+    while (count--)
     {
-        QListWidgetItem *item = ui->channelList->takeItem(0);
+        qDebug() << "-1";
+        ui->channelList->takeItem(0);
     }
+    /*这个for循环不知道写的有什么问题，不能正常工作，改用while循环
+    for (int i = 0; i < ui->channelList->count(); i++)
+    {
+        ui->channelList->takeItem(0);
+    }
+    */
 
     // ui->channelList->clear();
     //  判断当前所在服务器
@@ -239,7 +247,8 @@ void MainWidget::refreshChannelList()
     //添加当前选中服务器加入的频道到列表显示
     foreach (QListWidgetItem *channel, this->serverList.at(currentServerIndex)->channelList)
     {
-        qDebug() << "+1";
         ui->channelList->addItem(channel);
     }
+    //切换后默认选中第一行，避免悬空
+    ui->channelList->setCurrentRow(0);
 }
