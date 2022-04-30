@@ -19,6 +19,7 @@ LoginWidget::LoginWidget(Server *server, QDialog *parent) : QDialog(parent), ui(
     ui->setupUi(this);
     this->setWindowTitle("登录");
     initConnect();
+    setStyle();
     //模态对话框
     this->setModal(true);
     this->show();
@@ -33,6 +34,15 @@ LoginWidget::~LoginWidget()
         delete server;
     }
     delete ui;
+}
+
+//设置qss样式
+void LoginWidget::setStyle()
+{
+    QFile qssfile(":/qss/Login.qss");
+    qssfile.open(QFile::ReadOnly);
+    QString str = qssfile.readAll();
+    this->setStyleSheet(str);
 }
 
 //获取字母对应图标ID

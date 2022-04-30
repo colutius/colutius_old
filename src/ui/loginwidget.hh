@@ -3,6 +3,7 @@
 #include "../server.hh"
 #include "../socket.hh"
 #include <QDialog>
+#include <QFile>
 #include <QFont>
 #include <QFontDatabase>
 #include <QList>
@@ -26,6 +27,7 @@ class LoginWidget : public QDialog
     void initConnect();    //初始化信号槽
     void connect2Server(); //连接到服务器
     void login();          //登录
+    void setStyle();
 
   private:
     Ui::LoginWidget *ui;
