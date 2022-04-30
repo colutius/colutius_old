@@ -28,6 +28,7 @@ add_executable(${PROJECT_NAME}
         src/ui/config.ui
 
         src/resource/resource.qrc
+        src/resource/img/logo.rc
         )
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)

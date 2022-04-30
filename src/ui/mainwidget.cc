@@ -37,6 +37,7 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MainWidget
     // clang-format on
     ui->setupUi(this);
     this->setWindowTitle("Colutius");
+    this->setWindowIcon(QIcon(":/img/img/icon.svg"));
     initUI();
     initConnect();
     setStyle();

@@ -1,4 +1,5 @@
 # Colutius
+<img src="asset/img/colutius.png" width="10%">
 
 [[English](https://github.com/colutius/colutius#colutius)] [[中文](docs/README-CN.md)]
 

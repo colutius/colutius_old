@@ -1,16 +1,12 @@
 # Colutius
+<img src="../asset/img/colutius.png" width="10%">
 
 [[English](https://github.com/colutius/colutius#colutius)] [[中文](README-CN.md)]
 
+
+
 ```c++
-   _____      _       _   _           
-  / ____|    | |     | | (_)          
- | |     ___ | |_   _| |_ _ _   _ ___ 
- | |    / _ \| | | | | __| | | | / __|
- | |___| (_) | | |_| | |_| | |_| \__ \
-  \_____\___/|_|\__,_|\__|_|\__,_|___/
-  
-  qDebug() << "Hello Colutius!";
+![colutius1](/home/hgy/Downloads/colutius1.png) 1   _____      _       _   _           2  / ____|    | |     | | (_)          3 | |     ___ | |_   _| |_ _ _   _ ___ 4 | |    / _ \| | | | | __| | | | / __|5 | |___| (_) | | |_| | |_| | |_| \__ \6  \_____\___/|_|\__,_|\__|_|\__,_|___/7  8  qDebug() << "Hello Colutius!";
 ```
 
 ### 一个跨平台，易用，美观的IRC客户端

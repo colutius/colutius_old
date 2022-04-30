@@ -35,3 +35,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     src/resource/resource.qrc
+
+DISTFILES += \
+    src/resource/img/logo.rc
+
+RC_FILE += \
+    src/resource/img/logo.rc
