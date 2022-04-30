@@ -190,6 +190,11 @@ void MainWidget::receiveMsg()
                 //这里可以根据字典进行分别匹配处理服务器发送的各种消息
                 switch (commandMap[msg[1]])
                 {
+                // 376
+                case 26: {
+                    ui->msgList->addItem("登录成功！");
+                    break;
+                }
                 // PRIVMSG
                 case 0: {
                     QString mainMsg;
@@ -198,6 +203,11 @@ void MainWidget::receiveMsg()
                         mainMsg += (msg[s] + " ");
                     }
                     ui->msgList->addItem(msg[0] + mainMsg);
+                    break;
+                }
+                // 366
+                case 23: {
+                    ui->msgList->addItem("加入成功！");
                     break;
                 }
                 default: {
@@ -267,7 +277,6 @@ void MainWidget::refreshChannelList()
     int count = ui->channelList->count();
     while (count--)
     {
-        qDebug() << "-1";
         ui->channelList->takeItem(0);
     }
     /*这个for循环不知道写的有什么问题，不能正常工作，改用while循环
