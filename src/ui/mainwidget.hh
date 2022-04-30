@@ -7,7 +7,9 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QList>
+#include <QMap>
 #include <QWidget>
+
 namespace Ui
 {
 class MainWidget;
@@ -18,6 +20,7 @@ class MainWidget : public QWidget
     Q_OBJECT
 
   public:
+    QMap<QString, int> commandMap;
     QList<Server *> serverList;  //服务器列表
     Server *newServer = nullptr; //新建服务器实例
     // TODO 这里警告提示已匹配但从未访问

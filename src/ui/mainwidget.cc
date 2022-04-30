@@ -4,6 +4,37 @@
 
 MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MainWidget)
 {
+    // clang-format off
+    commandMap.insert("MODE",   -1);
+    commandMap.insert("PRIVMSG", 0);
+    commandMap.insert("NOTICE",  1);
+    commandMap.insert("JOIN",    2);
+    commandMap.insert("PART",    3);
+    commandMap.insert("NICK",    4);
+    commandMap.insert("QUIT",    5);
+    commandMap.insert("353",     6);
+    commandMap.insert("433",     7);
+    commandMap.insert("001",     8);
+    commandMap.insert("002",     9);
+    commandMap.insert("003",    10);
+    commandMap.insert("004",    11);
+    commandMap.insert("005",    12);
+    commandMap.insert("250",    13);
+    commandMap.insert("251",    14);
+    commandMap.insert("252",    15);
+    commandMap.insert("253",    16);
+    commandMap.insert("254",    17);
+    commandMap.insert("255",    18);
+    commandMap.insert("265",    19);
+    commandMap.insert("266",    20);
+    commandMap.insert("332",    21);
+    commandMap.insert("333",    22);
+    commandMap.insert("366",    23);
+    commandMap.insert("372",    24);
+    commandMap.insert("375",    25);
+    commandMap.insert("376",    26);
+    commandMap.insert("439",    27);
+    // clang-format on
     ui->setupUi(this);
     this->setWindowTitle("Colutius");
     initUI();
@@ -154,20 +185,25 @@ void MainWidget::receiveMsg()
             //有时候接收到的数据会在其中随机某个地方多出来个\n
             //导致有可能这一行用空格分隔之后只有一组，访问msg[1]会崩溃
             //所以先判断一下length保险一些
-            if (msg.length() > 1 && msg[1] == "PRIVMSG")
+            if (msg.length() > 1)
             {
-                QString mainMsg;
-                for (int i = 3; i < msg.length(); i++)
+                //这里可以根据字典进行分别匹配处理服务器发送的各种消息
+                switch (commandMap[msg[1]])
                 {
-                    mainMsg += (msg[i] + " ");
+                // PRIVMSG
+                case 0: {
+                    QString mainMsg;
+                    for (int s = 3; s < msg.length(); s++)
+                    {
+                        mainMsg += (msg[s] + " ");
+                    }
+                    ui->msgList->addItem(msg[0] + mainMsg);
+                    break;
                 }
-                ui->msgList->addItem(msg[0].split("!")[0] + mainMsg);
-                continue;
-            }
-            //服务器状态信息
-            else
-            {
-                qDebug() << i;
+                default: {
+                    qDebug() << i;
+                }
+                }
             }
         }
     }
