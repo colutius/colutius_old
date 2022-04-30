@@ -39,6 +39,8 @@ border-radius:10px;
 /* 消息列表样式 */
 #msgList {
 border-style: none;
+border-radius:10px;
+color:#eeeeee;
 background-color:#2e2f30;
 }
 
