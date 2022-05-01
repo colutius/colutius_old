@@ -209,6 +209,13 @@ void MainWidget::receiveMsg()
                 // 366
                 case 23: {
                     ui->msgList->addItem("加入成功！");
+                    QString channel = ui->channelEdit->text();
+                    ui->channelEdit->clear();
+                    int serverIndex = ui->serverList->currentRow();
+                    this->channelItem = new QListWidgetItem(channel);
+                    this->serverList.at(serverIndex)->channelList.append(channelItem);
+                    ui->channelList->addItem(channelItem);
+                    ui->channelList->setCurrentRow(this->serverList.at(serverIndex)->channelList.size() - 1);
                     break;
                 }
                 default: {
@@ -256,18 +263,10 @@ void MainWidget::addChannel()
     {
         return;
     }
-    ui->channelEdit->clear();
     //获取当前选中服务器
     int serverIndex = ui->serverList->currentRow();
     //发送JOIN信号
-    if (this->serverList.at(serverIndex)->sendMsg("JOIN " + channel + "\r\n"))
-    {
-        //界面添加频道
-        this->channelItem = new QListWidgetItem(channel);
-        this->serverList.at(serverIndex)->channelList.append(channelItem);
-        ui->channelList->addItem(channelItem);
-        ui->channelList->setCurrentRow(this->serverList.at(serverIndex)->channelList.size() - 1);
-    }
+    this->serverList.at(serverIndex)->sendMsg("JOIN " + channel + "\r\n");
 }
 
 void MainWidget::refreshChannelList()
