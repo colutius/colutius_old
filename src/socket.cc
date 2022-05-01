@@ -29,9 +29,15 @@ bool Socket::closeConnect() const
 }
 
 //登录
-bool Socket::login(const QString &nick, const QString &user) const
+bool Socket::login(const QString &nick, const QString &user, const QString &passwd) const
 {
-    // TODO登录到服务器
+    if (!passwd.isEmpty())
+    {
+        if (!this->sendMsg("PASS " + passwd))
+        {
+            return false;
+        }
+    }
     if (this->sendMsg("NICK " + nick))
     {
         if (this->sendMsg("USER " + user + " 8 * :Colutius IRC Client"))

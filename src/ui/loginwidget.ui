@@ -50,7 +50,13 @@
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <widget class="QLineEdit" name="hostEdit">
+             <property name="inputMask">
+              <string/>
+             </property>
              <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
               <string>irc.libera.chat</string>
              </property>
             </widget>
@@ -75,7 +81,10 @@
            <item>
             <widget class="QLineEdit" name="nickEdit">
              <property name="text">
-              <string>colutius</string>
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>nick</string>
              </property>
             </widget>
            </item>
@@ -88,11 +97,27 @@
               </size>
              </property>
              <property name="text">
-              <string>colutius</string>
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>user</string>
              </property>
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="passwdEdit">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>密码(没有留空)</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="connectBtn">

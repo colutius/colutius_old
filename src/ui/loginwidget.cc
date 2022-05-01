@@ -116,12 +116,20 @@ void LoginWidget::initConnect()
 //连接到服务器
 void LoginWidget::connect2Server()
 {
-    ui->connectBtn->setEnabled(false);
-    //获取窗口输入
+
+    // TODO 检查输入数据是否合法或给lineEdit添加限制，防止后续操作崩溃
+    // 获取窗口输入
     this->server->host = ui->hostEdit->text();
     this->server->port = ui->portEdit->text().toInt();
     this->server->nick = ui->nickEdit->text();
     this->server->user = ui->userEdit->text();
+    this->server->passwd = ui->passwdEdit->text();
+    // 任意输入框为空都不能继续执行
+    if (server->host.isEmpty() || server->nick.isEmpty() || server->user.isEmpty())
+    {
+        return;
+    }
+    ui->connectBtn->setEnabled(false);
     //设置字体
     int fontId = QFontDatabase::addApplicationFont(":/font/iconfont/letter.ttf");
     QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
@@ -148,5 +156,10 @@ void LoginWidget::login()
     {
         qDebug() << "登录成功！";
         this->close();
+    }
+    else
+    {
+        qDebug() << "登录失败！";
+        ui->connectBtn->setEnabled(true);
     }
 }

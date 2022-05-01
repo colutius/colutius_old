@@ -32,7 +32,7 @@ void Server::connect() const
 //登录
 bool Server::login() const
 {
-    return this->socket->login(this->nick, this->user);
+    return this->socket->login(this->nick, this->user, this->passwd);
 }
 
 //发送消息
