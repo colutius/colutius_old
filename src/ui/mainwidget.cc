@@ -140,11 +140,23 @@ void MainWidget::sendMsg()
     // 判断当前所在服务器及频道
     int currentServerIndex = ui->serverList->currentRow();
     int currentChannelIndex = ui->channelList->currentRow();
+    if (currentChannelIndex == -1)
+    {
+        return;
+    }
     if (msg.at(0) == '/')
     {
-        msg = msg.remove('/');
-        serverList.at(currentServerIndex)->sendMsg(msg);
-        return;
+        QStringList buf = msg.split(' ');
+        msg.clear();
+        if (buf[0] == "/msg")
+        {
+            for (int i = 2; i < buf.size(); i++)
+            {
+                msg += buf[i];
+            }
+            serverList.at(currentServerIndex)->sendMsg("PRIVMSG " + buf[1] + " :" + msg);
+            return;
+        }
     }
     // 构造发送消息
     msg =
